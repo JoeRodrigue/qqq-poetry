@@ -12,7 +12,7 @@ DELAY_DEFAULT   = 60
 
 def f(i: int, angle: int, delay: int) -> None:
 	t.color(t.colors[i % len(t.colors)])
-	t.width(i / 100 + 0.5)
+	t.width(i / 100 + 0.8)
 	t.fd(i)
 	t.lt(angle)
 	if (i < 256):
@@ -41,6 +41,6 @@ def main() -> None:
 	t.ht()
 	t.tracer(0)
 	t.bgcolor('black')
-	t.colors = ['gray', 'orange', 'olive drab', 'blue', 'yellow', 'black', 'violet', 'steel blue', 'red']
+	t.colors = ['pink', 'orange', 'olive drab', 'blue', 'yellow', 'violet', 'steel blue', 'red', 'cyan', 'gray', 'white']
 	f(0, angle, delay)
 	t.done()
