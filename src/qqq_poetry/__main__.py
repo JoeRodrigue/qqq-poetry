@@ -1,6 +1,4 @@
 from argparse import ArgumentParser as Parser
-from random   import random
-from time     import sleep
 from qqq_poetry.harmonic_mean import harmonic_mean
 import turtle as t
 
@@ -8,15 +6,16 @@ FGCOLOR_DEFAULT = 'grey'
 BGCOLOR_DEFAULT = 'on_white'
 ATTRS_DEFAULT   = ['bold']
 ANGLE_DEFAULT   = 59
-DELAY_DEFAULT   = 60
+DELAY_DEFAULT   = 10
+SIZE_DEFAULT    = 128
 
-def f(i: int, angle: int, delay: int) -> None:
-	t.color(t.colors[i % len(t.colors)])
-	t.width(i / 100 + 0.8)
-	t.fd(i)
-	t.lt(angle)
-	if (i < 256):
-		t.ontimer(lambda: f(i + 1, angle, delay), delay)
+def f(t1: t.Turtle, i: int, angle: int, delay: int, size: int) -> None:
+	t1.color(t.colors[i % len(t.colors)])
+	t1.width(i / 100 + 0.8)
+	t1.fd(i)
+	t1.lt(angle)
+	if (i < size):
+		t.ontimer(lambda: f(t1, i + 1, angle, delay, size), delay)
 
 def main() -> None:
 	parser = Parser(
@@ -29,18 +28,32 @@ def main() -> None:
 	parser.add_argument('--bgcolor', default = BGCOLOR_DEFAULT, help = 'Background color')
 	parser.add_argument('--angle',   type = int, default = ANGLE_DEFAULT,   help = "Angle in radians for turtle left turn")
 	parser.add_argument('--delay',   type = int, default = DELAY_DEFAULT,   help = "Delay in milliseconds between screen updates")
+	parser.add_argument('--size',    type = int, default = SIZE_DEFAULT,    help = "Size of each pinwheel")
 	args = parser.parse_args()
 	floats  = args.floats
 	fgcolor = args.fgcolor
 	bgcolor = args.bgcolor
 	angle   = args.angle
 	delay   = args.delay
-	print(floats, fgcolor, bgcolor)
+	size    = args.size
+	print(floats, fgcolor, bgcolor, angle, delay, size)
 	print(harmonic_mean([float(n) for n in floats]))
-	# t.screensize(700, 600)
-	t.ht()
+	t1 = t.Turtle()
+	t2 = t.Turtle()
+	t1.reset()
+	t2.reset()
+	t1.home()
+	t1.ht()
+	t2.ht()
 	t.tracer(0)
 	t.bgcolor('black')
 	t.colors = ['pink', 'orange', 'olive drab', 'blue', 'yellow', 'violet', 'steel blue', 'red', 'cyan', 'gray', 'white']
-	f(0, angle, delay)
+	t1.setpos(size, size)
+	t1.pd()
+	f(t1, 0, angle, delay, size)
+	# t1.pu()
+	t2.setpos(-size, -size)
+	t2.pd()
+	f(t2, 0, angle, delay, size)
+	# t2.pu()
 	t.done()
