@@ -11,7 +11,7 @@ packages = [{include = "qqq_poetry", from = "src"}]
 python = "^3.11"
 
 [tool.poetry.scripts]
-	harmonic-mean = 'src.qqq_poetry.__main__:main'
+	harmonic-mean = 'qqq_poetry.__main__:main'
 
 [build-system]
 requires = ["poetry-core"]
