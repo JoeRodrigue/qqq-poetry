@@ -26,9 +26,13 @@ def main() -> None:
 	parser.add_argument('floats', metavar = 'n', type = float, nargs = '+', help = 'A float')
 	parser.add_argument('--fgcolor', default = FGCOLOR_DEFAULT, help = 'Foreground color')
 	parser.add_argument('--bgcolor', default = BGCOLOR_DEFAULT, help = 'Background color')
-	parser.add_argument('--angle',   type = int, default = ANGLE_DEFAULT,   help = "Angle in radians for turtle left turn")
+	parser.add_argument('--angle',   type = int, default = ANGLE_DEFAULT,   help = "Angle in degrees for turtle left turn")
 	parser.add_argument('--delay',   type = int, default = DELAY_DEFAULT,   help = "Delay in milliseconds between screen updates")
 	parser.add_argument('--size',    type = int, default = SIZE_DEFAULT,    help = "Size of each pinwheel")
+	# parser.add_argument('--version', action = 'store_true',  help = 'Version number')
+	__version_info__ = ('2013','03','14')
+	__version__ = '-'.join(__version_info__)
+	parser.add_argument('-V', '--version', action='version', version="%(prog)s ("+__version__+")")
 	args = parser.parse_args()
 	floats  = args.floats
 	fgcolor = args.fgcolor
@@ -36,7 +40,13 @@ def main() -> None:
 	angle   = args.angle
 	delay   = args.delay
 	size    = args.size
-	print(floats, fgcolor, bgcolor, angle, delay, size)
+	v       = 'v' # args.version
+	for elt in dir(args):
+		print(elt)
+	print(floats, fgcolor, bgcolor, angle, delay, size, v)
+	# if v:
+	# 	print(getattr('version'))
+	# 	exit()
 	print(harmonic_mean([float(n) for n in floats]))
 	t1 = t.Turtle()
 	t2 = t.Turtle()

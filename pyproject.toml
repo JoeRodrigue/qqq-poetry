@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "qqq-poetry"
-version = "0.1.6"
+version = "0.1.8"
 description = "A test project to learn how to use Poetry"
 authors = ["Joe Rodrigue <joe.rodrigue@gmail.com>"]
 license = "MIT"
@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "qqq_poetry", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.6"
 
 [tool.poetry.scripts]
 	harmonic-mean = 'qqq_poetry.__main__:main'
